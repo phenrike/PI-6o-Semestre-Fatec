@@ -1,0 +1,11 @@
+{
+ [
+ { "USUARIO_ID":"1"}
+ ],
+ [
+ { "PIZZA_INGREDIENTES":"1,3,5"}
+ ],
+ [
+ { "PIZZA_INGREDIENTES":"2,7,8"}
+ ]
+ }
