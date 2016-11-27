@@ -20,7 +20,7 @@ import Model.Usuario;
 @RestController
 public class UsuarioController {
 
-	@RequestMapping("/logar")
+	@RequestMapping(value = "/logar" , method = RequestMethod.POST)
 	public ModelAndView Logar(@RequestParam(value = "login", defaultValue = "") String login,
 			@RequestParam(value = "senha", defaultValue = "") String senha) {
 
@@ -28,7 +28,9 @@ public class UsuarioController {
 		Login log = new Login();
 		if (log.logar(login, senha)) {
 			model = new ModelAndView("/carregarUsuario" + "?" + "nomeAcesso=" + login + "&passeAcesso=" + senha);
+			
 		} else {
+			System.out.println(login+" "+senha);
 			model = new ModelAndView("/erro");
 		}
 

@@ -9,3 +9,22 @@
  { "PIZZA_INGREDIENTES":"2,7,8"}
  ]
  }
+
+{
+	'pedido' : {
+		'id': 1,
+		'pizzas' : [
+			{ 'id' : 0, 'ingredientes' : [34, 52, 64] },
+			{ 'id' : 3, 'ingredientes' : [34, 12, 666] },
+			{ 'id' : 3, 'ingredientes' : [34, 12, 666] },
+		]
+	},
+	'pedido' : {
+		'id': 1,
+		'pizzas' : [
+			{ 'id' : 0, 'ingredientes' : [34, 52, 64] },
+			{ 'id' : 3, 'ingredientes' : [34, 12, 666] },
+			{ 'id' : 3, 'ingredientes' : [34, 12, 666] },
+		]
+	}
+}
