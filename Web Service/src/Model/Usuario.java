@@ -23,7 +23,8 @@ public class Usuario {
 
 			ConexaoDB conexao = new ConexaoDB();
 			conexao.iniciarConexao();
-			ResultSet rs = conexao.executarQuery("select * from usuario where login='" + login + "' and senha='" + senha + "'");
+			ResultSet rs = conexao
+					.executarQuery("select * from usuario where login='" + login + "' and senha='" + senha + "'");
 
 			if (rs.next()) {
 				this.id = rs.getInt("ID");
@@ -35,6 +36,8 @@ public class Usuario {
 				this.dadosCartao = rs.getString("DADOSCARTAO");
 				this.endereco = rs.getString("ENDERECO");
 			}
+			
+			conexao.encerrarConexao();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -43,6 +46,14 @@ public class Usuario {
 
 	public int getId() {
 		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public String getNome() {

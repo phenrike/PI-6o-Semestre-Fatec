@@ -1,30 +1,18 @@
 {
- [
- { "USUARIO_ID":"1"}
- ],
- [
- { "PIZZA_INGREDIENTES":"1,3,5"}
- ],
- [
- { "PIZZA_INGREDIENTES":"2,7,8"}
- ]
- }
-
-{
 	'pedido' : {
-		'id': 1,
+		'id': 0,
+		'idusuario':1,
 		'pizzas' : [
-			{ 'id' : 0, 'ingredientes' : [34, 52, 64] },
-			{ 'id' : 3, 'ingredientes' : [34, 12, 666] },
-			{ 'id' : 3, 'ingredientes' : [34, 12, 666] },
-		]
-	},
-	'pedido' : {
-		'id': 1,
-		'pizzas' : [
-			{ 'id' : 0, 'ingredientes' : [34, 52, 64] },
-			{ 'id' : 3, 'ingredientes' : [34, 12, 666] },
-			{ 'id' : 3, 'ingredientes' : [34, 12, 666] },
+			{ 'id' : 0, 'ingredientes' : [1, 2, 3] },
+			{ 'id' : 0, 'ingredientes' : [4, 5, 6] },
+			{ 'id' : 0, 'ingredientes' : [7, 1, 2] },
 		]
 	}
+}
+
+{
+	'idusuario': 1,
+	'pizzas' : [	{ 'ingredientes' : [1, 2, 3]} ,
+			{ 'ingredientes' : [4, 5, 6]} ,
+			{ 'ingredientes' : [7, 1, 2]}]
 }

@@ -26,7 +26,7 @@ public class ConexaoDB {
 		
 		try {
 			this.st = this.con.createStatement();
-			this.st.executeQuery(query);
+			this.st.execute(query);
 			this.rs = st.getResultSet();
 		} catch (SQLException e) {
 			e.printStackTrace();
