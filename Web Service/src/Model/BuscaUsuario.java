@@ -1,39 +1,23 @@
 package Model;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class BuscaUsuario {
-	
-	private Usuario usuario;
-	
+
 	public Usuario buscarUsuario(String id) {
-		try {
 
-			ConexaoDB conexao = new ConexaoDB();
-			conexao.iniciarConexao();
-			ResultSet rs = conexao.executarQuery("select * from usuario where id='" + id + "'");
-			
-			this.usuario = new Usuario();
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("WebServicePizzaJustInTime");
+		EntityManager entityManager = factory.createEntityManager();
 
-			if (rs.next()) {
-				this.usuario.setId(rs.getInt("ID"));
-				this.usuario.setNome(rs.getString("NOME"));
-				this.usuario.setEmail(rs.getString("EMAIL"));
-				this.usuario.setLogin(rs.getString("LOGIN"));
-				this.usuario.setSenha(rs.getString("SENHA"));
-				this.usuario.setTelefone(rs.getString("TELEFONE"));
-				this.usuario.setDadosCartao(("DADOSCARTAO"));
-				this.usuario.setEndereco(rs.getString("ENDERECO"));
-			}
-			
-			conexao.encerrarConexao();
+		Usuario query = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.id=" + id, Usuario.class)
+				.getSingleResult();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return this.usuario;
+		entityManager.close();
+		factory.close();
+
+		return query;
 	}
 
 }

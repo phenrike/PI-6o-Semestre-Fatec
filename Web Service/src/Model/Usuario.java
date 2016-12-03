@@ -1,10 +1,17 @@
 package Model;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "USUARIO")
 public class Usuario {
 
+	@Id
+	@GeneratedValue(strategy= GenerationType.SEQUENCE)
 	private int id;
 	private String nome;
 	private String email;
@@ -16,32 +23,6 @@ public class Usuario {
 
 	public Usuario() {
 
-	}
-
-	public void carregarUsuario(String login, String senha) {
-		try {
-
-			ConexaoDB conexao = new ConexaoDB();
-			conexao.iniciarConexao();
-			ResultSet rs = conexao
-					.executarQuery("select * from usuario where login='" + login + "' and senha='" + senha + "'");
-
-			if (rs.next()) {
-				this.id = rs.getInt("ID");
-				this.nome = rs.getString("NOME");
-				this.email = rs.getString("EMAIL");
-				this.login = rs.getString("LOGIN");
-				this.senha = rs.getString("SENHA");
-				this.telefone = rs.getString("TELEFONE");
-				this.dadosCartao = rs.getString("DADOSCARTAO");
-				this.endereco = rs.getString("ENDERECO");
-			}
-			
-			conexao.encerrarConexao();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public int getId() {

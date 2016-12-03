@@ -11,8 +11,10 @@
 }
 
 {
-	'idusuario': 1,
-	'pizzas' : [	{ 'ingredientes' : [1, 2, 3]} ,
-			{ 'ingredientes' : [4, 5, 6]} ,
-			{ 'ingredientes' : [7, 1, 2]}]
+	'idusuario': 2,
+	'pizzas' : [	{ 'ingredientes' : [1,2,3]} ,
+			{ 'ingredientes' : [4,5,6]} ,
+			{ 'ingredientes' : [7,1,2]}]
 }
+
+{'idusuario': 3,'pizzas' : [	{ 'ingredientes' : [8, 9, 3]} ,{ 'ingredientes' : [2, 7, 6]} ,{ 'ingredientes' : [1, 13, 7, 3]}]}

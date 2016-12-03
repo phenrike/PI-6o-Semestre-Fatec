@@ -1,7 +1,9 @@
 package Model;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
+import javax.persistence.Persistence;
 
 public class Login {
 
@@ -9,25 +11,27 @@ public class Login {
 
 		boolean resultado = false;
 
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("WebServicePizzaJustInTime");
+		EntityManager entityManager = factory.createEntityManager();
+
 		try {
-			ConexaoDB conexao = new ConexaoDB();
-			conexao.iniciarConexao();
-			ResultSet rs = conexao.executarQuery("SELECT COUNT(1) AS LOGIN FROM USUARIO WHERE LOGIN='" + login + "' AND SENHA='" + senha + "'");
-	
-			if (rs.next()) {
-				Integer bool = (Integer) rs.getInt("LOGIN");
-				if (bool != null) {
-					if (bool > 0) {
-						resultado = true;
-					}
+
+			Usuario query = entityManager
+					.createQuery("SELECT u FROM Usuario u WHERE u.login='" + login + "' and u.senha='" + senha + "'",
+							Usuario.class)
+					.getSingleResult();
+			
+			if (query != null) {
+				if (query.getId() > 0) {
+					resultado = true;
 				}
 			}
 
-			conexao.encerrarConexao();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			entityManager.close();
+			factory.close();
+		} catch(NoResultException e) {
+	        return false;
+	    }
 
 		return resultado;
 	}

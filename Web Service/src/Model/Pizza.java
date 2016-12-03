@@ -1,13 +1,30 @@
 package Model;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "PIZZA")
 public class Pizza {
 
+	@Id
+	@GeneratedValue(strategy= GenerationType.SEQUENCE)
 	private int id;
-	private ArrayList<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
+
+	@OneToMany
+	@JoinTable(name = "PIZZAxINGREDIENTE", joinColumns = {
+			@JoinColumn(name = "IDFK_PIZZA", referencedColumnName = "ID") }, inverseJoinColumns = {
+					@JoinColumn(name = "IDFK_INGREDIENTE", referencedColumnName = "ID") })
+	private List<Ingrediente> ingredientes = new ArrayList<>();
+
 	private Double preco;
 
 	public int getId() {
@@ -18,15 +35,16 @@ public class Pizza {
 		this.id = id;
 	}
 
-	public Double getPreco() {
-		for (int i = 0; i < ingredientes.size(); i++) {
-			if(this.preco == null){
+	public void calcularPreco() {
+		for (Ingrediente i : ingredientes) {
+			if (this.preco == null) {
 				this.preco = 0.0;
 			}
-			
-			setPreco(this.preco + ingredientes.get(i).getPrecoPorGrama());
+			setPreco(this.preco += i.getPrecoPorGrama());
 		}
+	}
 
+	public Double getPreco() {
 		return preco;
 	}
 
@@ -34,38 +52,15 @@ public class Pizza {
 		this.preco = preco;
 	}
 
-	public ArrayList<Ingrediente> getIngredientes() {
+	public List<Ingrediente> getIngredientes() {
 		return ingredientes;
 	}
 
-	public void setIngredientes(ArrayList<Ingrediente> ingredientes) {
+	public void setIngredientes(List<Ingrediente> ingredientes) {
 		this.ingredientes = ingredientes;
 	}
 
 	public void adicionarIngrediente(Ingrediente ingrediente) {
 		ingredientes.add(ingrediente);
-	}
-
-	public void salvarPizza() {
-		ConexaoDB conexao = new ConexaoDB();
-		conexao.iniciarConexao();
-		conexao.executarQuery("INSERT INTO PIZZA VALUES (0," + getPreco() + ")");
-		conexao.executarQuery("SELECT LAST_INSERT_ID() INTO @ID");
-
-		ResultSet rs = conexao.executarQuery("select @ID");
-
-		try {
-			if (rs.next()) {
-				setId(rs.getInt("@ID"));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		for (int i = 0; i < ingredientes.size(); i++) {
-			conexao.executarQuery("INSERT INTO PIZZAxINGREDIENTE VALUES ("+getId()+","+ingredientes.get(i).getId()+")");
-		}
-		conexao.encerrarConexao();
 	}
 }
