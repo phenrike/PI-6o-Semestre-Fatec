@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,11 +22,14 @@ import Model.Usuario;
 @RestController
 public class PedidoController {
 
-	@RequestMapping(value = "/pedidos/{json}", method = RequestMethod.GET)
+	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+
+	@RequestMapping(value = "/pedidos/{json}", method = RequestMethod.POST)
 	public void fazerPedido(@PathVariable("json") JSONObject json) {
-		BuscaIngrediente buscaIgrediente = new BuscaIngrediente();
-		BuscaUsuario buscaUsuario = new BuscaUsuario();
-		Pedido pedido = new Pedido();
+
+		BuscaIngrediente buscaIgrediente = (BuscaIngrediente) context.getBean(BuscaIngrediente.class);
+		BuscaUsuario buscaUsuario = (BuscaUsuario) context.getBean(BuscaUsuario.class);
+		Pedido pedido = (Pedido) context.getBean(Pedido.class);
 
 		if (json.has("idusuario")) {
 			Usuario usuario = new Usuario();
@@ -74,7 +78,7 @@ public class PedidoController {
 
 	}
 
-	@RequestMapping(value = "/pedidos/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/pedidos/{id}", method = RequestMethod.GET)
 	public Pedido carregarPedidoPorId(@PathVariable("id") int id) {
 
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("WebServicePizzaJustInTime");

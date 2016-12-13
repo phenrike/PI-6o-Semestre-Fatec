@@ -11,7 +11,7 @@ import javax.persistence.Table;
 public class Usuario {
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
 	private String nome;
 	private String email;

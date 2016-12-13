@@ -5,6 +5,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class Login {
 
 	public boolean logar(String login, String senha) {
@@ -20,7 +23,7 @@ public class Login {
 					.createQuery("SELECT u FROM Usuario u WHERE u.login='" + login + "' and u.senha='" + senha + "'",
 							Usuario.class)
 					.getSingleResult();
-			
+
 			if (query != null) {
 				if (query.getId() > 0) {
 					resultado = true;
@@ -29,9 +32,9 @@ public class Login {
 
 			entityManager.close();
 			factory.close();
-		} catch(NoResultException e) {
-	        return false;
-	    }
+		} catch (NoResultException e) {
+			return false;
+		}
 
 		return resultado;
 	}

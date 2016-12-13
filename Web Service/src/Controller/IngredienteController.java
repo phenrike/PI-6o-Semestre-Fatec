@@ -4,6 +4,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +15,8 @@ import Model.Ingrediente;
 
 @RestController
 public class IngredienteController {
+
+	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
 	@RequestMapping(value = "/ingredientes", method = RequestMethod.GET)
 	public List<Ingrediente> carregarIngredientes() {

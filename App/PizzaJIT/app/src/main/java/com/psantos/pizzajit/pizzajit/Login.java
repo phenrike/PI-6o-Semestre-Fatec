@@ -21,7 +21,7 @@ public class Login {
 
     public void logar(Activity activity,String login, String senha){
         HttpClient httpclient = new DefaultHttpClient();
-        HttpGet httpget = new HttpGet("http://192.168.0.17:8080/logar?login="+login+"&senha="+senha+"");
+        HttpGet httpget = new HttpGet("http://172.16.40.98:8080/login/"+login+"/"+senha+"");
 
         try {
             HttpResponse response = httpclient.execute(httpget);

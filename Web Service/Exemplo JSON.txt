@@ -1,20 +1,9 @@
 {
-	'pedido' : {
-		'id': 0,
-		'idusuario':1,
-		'pizzas' : [
-			{ 'id' : 0, 'ingredientes' : [1, 2, 3] },
-			{ 'id' : 0, 'ingredientes' : [4, 5, 6] },
-			{ 'id' : 0, 'ingredientes' : [7, 1, 2] },
-		]
-	}
+	'idusuario': 4,
+	'pizzas' : [	{ 'ingredientes' : [1,2,3]}]
 }
 
 {
-	'idusuario': 2,
-	'pizzas' : [	{ 'ingredientes' : [1,2,3]} ,
-			{ 'ingredientes' : [4,5,6]} ,
-			{ 'ingredientes' : [7,1,2]}]
+	'idusuario': 3,
+	'pizzas' : [	{ 'ingredientes' : [10,11,12]}]
 }
-
-{'idusuario': 3,'pizzas' : [	{ 'ingredientes' : [8, 9, 3]} ,{ 'ingredientes' : [2, 7, 6]} ,{ 'ingredientes' : [1, 13, 7, 3]}]}

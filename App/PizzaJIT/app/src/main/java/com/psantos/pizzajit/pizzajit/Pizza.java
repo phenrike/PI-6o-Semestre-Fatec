@@ -51,7 +51,7 @@ public class Pizza implements Serializable {
     public void carregarOpcoesIngredientes() {
 
         HttpClient httpclient = new DefaultHttpClient();
-        HttpGet httpget = new HttpGet("http://192.168.0.17:8080/carregarIngredientes");
+        HttpGet httpget = new HttpGet("http://172.16.40.98:8080/ingredientes");
         ArrayList<Ingrediente> listaIngredientes = new ArrayList<Ingrediente>();
 
         try {

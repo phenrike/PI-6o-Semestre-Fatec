@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class Pizza {
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
 
 	@OneToMany
